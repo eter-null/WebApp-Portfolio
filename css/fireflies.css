@@ -1,37 +1,38 @@
 .fireflies {
     position: fixed;
     display: flex;
-    /*To make it cover the entire screen and not get block by flexboxes*/
+    flex-wrap: wrap;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    z-index: -1; /*  z index low to make it appear beneath other elements  */
-
+    z-index: -1;
+    pointer-events: none; /* Prevent blocking clicks */
+    overflow: hidden;
 }
 
-
-
 .fireflies span {
-    width: 30px;
-    height: 30px;
+    width: clamp(10px, 3vw, 30px);
+    height: clamp(10px, 3vw, 30px);
     background: #a12dff;
     margin: 4px;
     border-radius: 50%;
-    box-shadow: 0 0 0 10px #AB2DFF44, 0 0 50px #a12dff,
-    0 0 100px #a12dff;
-    animation: rise 15s;
-    animation-iteration-count: infinite;
-    animation-timing-function: linear;
+    box-shadow: 0 0 0 10px #AB2DFF44, 0 0 50px #a12dff, 0 0 100px #a12dff;
+    animation: rise 15s linear infinite;
     animation-duration: calc(260s / var(--i));
-
 }
 
 @keyframes rise {
-    0%
-    {
+    0% {
         transform: translateY(100vh) scale(0);
+        opacity: 0;
     }
-
-
+    50% {
+        opacity: 1;
+        transform: translateY(50vh) scale(1.1);
+    }
+    100% {
+        transform: translateY(-10vh) scale(0.3);
+        opacity: 0;
+    }
 }
